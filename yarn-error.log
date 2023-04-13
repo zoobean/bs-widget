@@ -1,0 +1,31 @@
+Arguments: 
+  /Users/kuzin/.nvm/versions/node/v18.2.0/bin/node /Users/kuzin/.yarn/bin/yarn.js
+
+PATH: 
+  /Users/kuzin/Library/Python/3.8/bin:/Users/kuzin/.pyenv/shims:/Users/kuzin/.yarn/bin:/Users/kuzin/.config/yarn/global/node_modules/.bin:/Users/kuzin/.nvm/versions/node/v18.2.0/bin:/Users/kuzin/.rbenv/shims:/Users/kuzin/.rbenv/bin:/opt/homebrew/opt/postgresql@9.6/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/Users/kuzin/.cargo/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.2.0
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  SyntaxError: /Users/kuzin/Code/bs-widget/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /Users/kuzin/.yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/Users/kuzin/.yarn/lib/cli.js:310:30)
+      at /Users/kuzin/.yarn/lib/cli.js:321:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
