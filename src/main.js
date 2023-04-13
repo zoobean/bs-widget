@@ -2,11 +2,12 @@
 
 import tinycolor from "tinycolor2";
 
-export function BWidget(options) {
+export default function BSWidget(options) {
   let _this = this;
   let cors = "https://beanstack-cors-anywhere.herokuapp.com/";
   let api =
     "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
+
   let defaults = {
     groupId: 30,
     container: "#bs-widget",

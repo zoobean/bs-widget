@@ -1,23 +1,36 @@
-'use strict';
+"use strict";
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys.push.apply(keys, symbols);
+    enumerableOnly &&
+      (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })),
+      keys.push.apply(keys, symbols);
   }
   return keys;
 }
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
+    i % 2
+      ? ownKeys(Object(source), !0).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        })
+      : Object.getOwnPropertyDescriptors
+      ? Object.defineProperties(
+          target,
+          Object.getOwnPropertyDescriptors(source)
+        )
+      : ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(
+            target,
+            key,
+            Object.getOwnPropertyDescriptor(source, key)
+          );
+        });
   }
   return target;
 }
@@ -28,7 +41,7 @@ function _defineProperty(obj, key, value) {
       value: value,
       enumerable: true,
       configurable: true,
-      writable: true
+      writable: true,
     });
   } else {
     obj[key] = value;
@@ -54,11 +67,22 @@ function _toPropertyKey(arg) {
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
+  return (
+    (_typeof =
+      "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
+        ? function (obj) {
+            return typeof obj;
+          }
+        : function (obj) {
+            return obj &&
+              "function" == typeof Symbol &&
+              obj.constructor === Symbol &&
+              obj !== Symbol.prototype
+              ? "symbol"
+              : typeof obj;
+          }),
+    _typeof(obj)
+  );
 }
 
 // https://github.com/bgrins/TinyColor
@@ -79,7 +103,13 @@ function tinycolor(color, opts) {
     return new tinycolor(color, opts);
   }
   var rgb = inputToRGB(color);
-  this._originalInput = color, this._r = rgb.r, this._g = rgb.g, this._b = rgb.b, this._a = rgb.a, this._roundA = Math.round(100 * this._a) / 100, this._format = opts.format || rgb.format;
+  (this._originalInput = color),
+    (this._r = rgb.r),
+    (this._g = rgb.g),
+    (this._b = rgb.b),
+    (this._a = rgb.a),
+    (this._roundA = Math.round(100 * this._a) / 100),
+    (this._format = opts.format || rgb.format);
   this._gradientType = opts.gradientType;
 
   // Don't let the range of [0,255] come back in [0,1].
@@ -122,9 +152,12 @@ tinycolor.prototype = {
     RsRGB = rgb.r / 255;
     GsRGB = rgb.g / 255;
     BsRGB = rgb.b / 255;
-    if (RsRGB <= 0.03928) R = RsRGB / 12.92;else R = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
-    if (GsRGB <= 0.03928) G = GsRGB / 12.92;else G = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
-    if (BsRGB <= 0.03928) B = BsRGB / 12.92;else B = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
+    if (RsRGB <= 0.03928) R = RsRGB / 12.92;
+    else R = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
+    if (GsRGB <= 0.03928) G = GsRGB / 12.92;
+    else G = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
+    if (BsRGB <= 0.03928) B = BsRGB / 12.92;
+    else B = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
     return 0.2126 * R + 0.7152 * G + 0.0722 * B;
   },
   setAlpha: function setAlpha(value) {
@@ -138,7 +171,7 @@ tinycolor.prototype = {
       h: hsv.h * 360,
       s: hsv.s,
       v: hsv.v,
-      a: this._a
+      a: this._a,
     };
   },
   toHsvString: function toHsvString() {
@@ -146,7 +179,9 @@ tinycolor.prototype = {
     var h = Math.round(hsv.h * 360),
       s = Math.round(hsv.s * 100),
       v = Math.round(hsv.v * 100);
-    return this._a == 1 ? "hsv(" + h + ", " + s + "%, " + v + "%)" : "hsva(" + h + ", " + s + "%, " + v + "%, " + this._roundA + ")";
+    return this._a == 1
+      ? "hsv(" + h + ", " + s + "%, " + v + "%)"
+      : "hsva(" + h + ", " + s + "%, " + v + "%, " + this._roundA + ")";
   },
   toHsl: function toHsl() {
     var hsl = rgbToHsl(this._r, this._g, this._b);
@@ -154,7 +189,7 @@ tinycolor.prototype = {
       h: hsl.h * 360,
       s: hsl.s,
       l: hsl.l,
-      a: this._a
+      a: this._a,
     };
   },
   toHslString: function toHslString() {
@@ -162,7 +197,9 @@ tinycolor.prototype = {
     var h = Math.round(hsl.h * 360),
       s = Math.round(hsl.s * 100),
       l = Math.round(hsl.l * 100);
-    return this._a == 1 ? "hsl(" + h + ", " + s + "%, " + l + "%)" : "hsla(" + h + ", " + s + "%, " + l + "%, " + this._roundA + ")";
+    return this._a == 1
+      ? "hsl(" + h + ", " + s + "%, " + l + "%)"
+      : "hsla(" + h + ", " + s + "%, " + l + "%, " + this._roundA + ")";
   },
   toHex: function toHex(allow3Char) {
     return rgbToHex(this._r, this._g, this._b, allow3Char);
@@ -181,22 +218,54 @@ tinycolor.prototype = {
       r: Math.round(this._r),
       g: Math.round(this._g),
       b: Math.round(this._b),
-      a: this._a
+      a: this._a,
     };
   },
   toRgbString: function toRgbString() {
-    return this._a == 1 ? "rgb(" + Math.round(this._r) + ", " + Math.round(this._g) + ", " + Math.round(this._b) + ")" : "rgba(" + Math.round(this._r) + ", " + Math.round(this._g) + ", " + Math.round(this._b) + ", " + this._roundA + ")";
+    return this._a == 1
+      ? "rgb(" +
+          Math.round(this._r) +
+          ", " +
+          Math.round(this._g) +
+          ", " +
+          Math.round(this._b) +
+          ")"
+      : "rgba(" +
+          Math.round(this._r) +
+          ", " +
+          Math.round(this._g) +
+          ", " +
+          Math.round(this._b) +
+          ", " +
+          this._roundA +
+          ")";
   },
   toPercentageRgb: function toPercentageRgb() {
     return {
       r: Math.round(bound01(this._r, 255) * 100) + "%",
       g: Math.round(bound01(this._g, 255) * 100) + "%",
       b: Math.round(bound01(this._b, 255) * 100) + "%",
-      a: this._a
+      a: this._a,
     };
   },
   toPercentageRgbString: function toPercentageRgbString() {
-    return this._a == 1 ? "rgb(" + Math.round(bound01(this._r, 255) * 100) + "%, " + Math.round(bound01(this._g, 255) * 100) + "%, " + Math.round(bound01(this._b, 255) * 100) + "%)" : "rgba(" + Math.round(bound01(this._r, 255) * 100) + "%, " + Math.round(bound01(this._g, 255) * 100) + "%, " + Math.round(bound01(this._b, 255) * 100) + "%, " + this._roundA + ")";
+    return this._a == 1
+      ? "rgb(" +
+          Math.round(bound01(this._r, 255) * 100) +
+          "%, " +
+          Math.round(bound01(this._g, 255) * 100) +
+          "%, " +
+          Math.round(bound01(this._b, 255) * 100) +
+          "%)"
+      : "rgba(" +
+          Math.round(bound01(this._r, 255) * 100) +
+          "%, " +
+          Math.round(bound01(this._g, 255) * 100) +
+          "%, " +
+          Math.round(bound01(this._b, 255) * 100) +
+          "%, " +
+          this._roundA +
+          ")";
   },
   toName: function toName() {
     if (this._a === 0) {
@@ -215,14 +284,30 @@ tinycolor.prototype = {
       var s = tinycolor(secondColor);
       secondHex8String = "#" + rgbaToArgbHex(s._r, s._g, s._b, s._a);
     }
-    return "progid:DXImageTransform.Microsoft.gradient(" + gradientType + "startColorstr=" + hex8String + ",endColorstr=" + secondHex8String + ")";
+    return (
+      "progid:DXImageTransform.Microsoft.gradient(" +
+      gradientType +
+      "startColorstr=" +
+      hex8String +
+      ",endColorstr=" +
+      secondHex8String +
+      ")"
+    );
   },
   toString: function toString(format) {
     var formatSet = !!format;
     format = format || this._format;
     var formattedString = false;
     var hasAlpha = this._a < 1 && this._a >= 0;
-    var needsAlphaFormat = !formatSet && hasAlpha && (format === "hex" || format === "hex6" || format === "hex3" || format === "hex4" || format === "hex8" || format === "name");
+    var needsAlphaFormat =
+      !formatSet &&
+      hasAlpha &&
+      (format === "hex" ||
+        format === "hex6" ||
+        format === "hex3" ||
+        format === "hex4" ||
+        format === "hex8" ||
+        format === "name");
     if (needsAlphaFormat) {
       // Special case for "transparent", all other non-alpha formats
       // will return rgba when there is transparency.
@@ -316,7 +401,7 @@ tinycolor.prototype = {
   },
   tetrad: function tetrad() {
     return this._applyCombination(polyad, [4]);
-  }
+  },
 };
 
 // If input is an object, force 1 into "1.0" to handle ratios properly
@@ -357,7 +442,7 @@ function inputToRGB(color) {
   var rgb = {
     r: 0,
     g: 0,
-    b: 0
+    b: 0,
   };
   var a = 1;
   var s = null;
@@ -369,17 +454,29 @@ function inputToRGB(color) {
     color = stringInputToObject(color);
   }
   if (_typeof(color) == "object") {
-    if (isValidCSSUnit(color.r) && isValidCSSUnit(color.g) && isValidCSSUnit(color.b)) {
+    if (
+      isValidCSSUnit(color.r) &&
+      isValidCSSUnit(color.g) &&
+      isValidCSSUnit(color.b)
+    ) {
       rgb = rgbToRgb(color.r, color.g, color.b);
       ok = true;
       format = String(color.r).substr(-1) === "%" ? "prgb" : "rgb";
-    } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.v)) {
+    } else if (
+      isValidCSSUnit(color.h) &&
+      isValidCSSUnit(color.s) &&
+      isValidCSSUnit(color.v)
+    ) {
       s = convertToPercentage(color.s);
       v = convertToPercentage(color.v);
       rgb = hsvToRgb(color.h, s, v);
       ok = true;
       format = "hsv";
-    } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.l)) {
+    } else if (
+      isValidCSSUnit(color.h) &&
+      isValidCSSUnit(color.s) &&
+      isValidCSSUnit(color.l)
+    ) {
       s = convertToPercentage(color.s);
       l = convertToPercentage(color.l);
       rgb = hslToRgb(color.h, s, l);
@@ -397,7 +494,7 @@ function inputToRGB(color) {
     r: Math.min(255, Math.max(rgb.r, 0)),
     g: Math.min(255, Math.max(rgb.g, 0)),
     b: Math.min(255, Math.max(rgb.b, 0)),
-    a: a
+    a: a,
   };
 }
 
@@ -416,7 +513,7 @@ function rgbToRgb(r, g, b) {
   return {
     r: bound01(r, 255) * 255,
     g: bound01(g, 255) * 255,
-    b: bound01(b, 255) * 255
+    b: bound01(b, 255) * 255,
   };
 }
 
@@ -454,7 +551,7 @@ function rgbToHsl(r, g, b) {
   return {
     h: h,
     s: s,
-    l: l
+    l: l,
   };
 }
 
@@ -487,7 +584,7 @@ function hslToRgb(h, s, l) {
   return {
     r: r * 255,
     g: g * 255,
-    b: b * 255
+    b: b * 255,
   };
 }
 
@@ -525,7 +622,7 @@ function rgbToHsv(r, g, b) {
   return {
     h: h,
     s: s,
-    v: v
+    v: v,
   };
 }
 
@@ -549,7 +646,7 @@ function hsvToRgb(h, s, v) {
   return {
     r: r * 255,
     g: g * 255,
-    b: b * 255
+    b: b * 255,
   };
 }
 
@@ -558,10 +655,19 @@ function hsvToRgb(h, s, v) {
 // Assumes r, g, and b are contained in the set [0, 255]
 // Returns a 3 or 6 character hex
 function rgbToHex(r, g, b, allow3Char) {
-  var hex = [pad2(Math.round(r).toString(16)), pad2(Math.round(g).toString(16)), pad2(Math.round(b).toString(16))];
+  var hex = [
+    pad2(Math.round(r).toString(16)),
+    pad2(Math.round(g).toString(16)),
+    pad2(Math.round(b).toString(16)),
+  ];
 
   // Return a 3 character hex if possible
-  if (allow3Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1)) {
+  if (
+    allow3Char &&
+    hex[0].charAt(0) == hex[0].charAt(1) &&
+    hex[1].charAt(0) == hex[1].charAt(1) &&
+    hex[2].charAt(0) == hex[2].charAt(1)
+  ) {
     return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
   }
   return hex.join("");
@@ -572,11 +678,24 @@ function rgbToHex(r, g, b, allow3Char) {
 // Assumes r, g, b are contained in the set [0, 255] and
 // a in [0, 1]. Returns a 4 or 8 character rgba hex
 function rgbaToHex(r, g, b, a, allow4Char) {
-  var hex = [pad2(Math.round(r).toString(16)), pad2(Math.round(g).toString(16)), pad2(Math.round(b).toString(16)), pad2(convertDecimalToHex(a))];
+  var hex = [
+    pad2(Math.round(r).toString(16)),
+    pad2(Math.round(g).toString(16)),
+    pad2(Math.round(b).toString(16)),
+    pad2(convertDecimalToHex(a)),
+  ];
 
   // Return a 4 character hex if possible
-  if (allow4Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1) && hex[3].charAt(0) == hex[3].charAt(1)) {
-    return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0) + hex[3].charAt(0);
+  if (
+    allow4Char &&
+    hex[0].charAt(0) == hex[0].charAt(1) &&
+    hex[1].charAt(0) == hex[1].charAt(1) &&
+    hex[2].charAt(0) == hex[2].charAt(1) &&
+    hex[3].charAt(0) == hex[3].charAt(1)
+  ) {
+    return (
+      hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0) + hex[3].charAt(0)
+    );
   }
   return hex.join("");
 }
@@ -585,7 +704,12 @@ function rgbaToHex(r, g, b, a, allow4Char) {
 // Converts an RGBA color to an ARGB Hex8 string
 // Rarely used, but required for "toFilter()"
 function rgbaToArgbHex(r, g, b, a) {
-  var hex = [pad2(convertDecimalToHex(a)), pad2(Math.round(r).toString(16)), pad2(Math.round(g).toString(16)), pad2(Math.round(b).toString(16))];
+  var hex = [
+    pad2(convertDecimalToHex(a)),
+    pad2(Math.round(r).toString(16)),
+    pad2(Math.round(g).toString(16)),
+    pad2(Math.round(b).toString(16)),
+  ];
   return hex.join("");
 }
 
@@ -599,7 +723,7 @@ tinycolor.random = function () {
   return tinycolor.fromRatio({
     r: Math.random(),
     g: Math.random(),
-    b: Math.random()
+    b: Math.random(),
   });
 };
 
@@ -675,26 +799,32 @@ function polyad(color, number) {
   var result = [tinycolor(color)];
   var step = 360 / number;
   for (var i = 1; i < number; i++) {
-    result.push(tinycolor({
-      h: (hsl.h + i * step) % 360,
-      s: hsl.s,
-      l: hsl.l
-    }));
+    result.push(
+      tinycolor({
+        h: (hsl.h + i * step) % 360,
+        s: hsl.s,
+        l: hsl.l,
+      })
+    );
   }
   return result;
 }
 function _splitcomplement(color) {
   var hsl = tinycolor(color).toHsl();
   var h = hsl.h;
-  return [tinycolor(color), tinycolor({
-    h: (h + 72) % 360,
-    s: hsl.s,
-    l: hsl.l
-  }), tinycolor({
-    h: (h + 216) % 360,
-    s: hsl.s,
-    l: hsl.l
-  })];
+  return [
+    tinycolor(color),
+    tinycolor({
+      h: (h + 72) % 360,
+      s: hsl.s,
+      l: hsl.l,
+    }),
+    tinycolor({
+      h: (h + 216) % 360,
+      s: hsl.s,
+      l: hsl.l,
+    }),
+  ];
 }
 function _analogous(color, results, slices) {
   results = results || 6;
@@ -702,7 +832,7 @@ function _analogous(color, results, slices) {
   var hsl = tinycolor(color).toHsl();
   var part = 360 / slices;
   var ret = [tinycolor(color)];
-  for (hsl.h = (hsl.h - (part * results >> 1) + 720) % 360; --results;) {
+  for (hsl.h = (hsl.h - ((part * results) >> 1) + 720) % 360; --results; ) {
     hsl.h = (hsl.h + part) % 360;
     ret.push(tinycolor(hsl));
   }
@@ -717,11 +847,13 @@ function _monochromatic(color, results) {
   var ret = [];
   var modification = 1 / results;
   while (results--) {
-    ret.push(tinycolor({
-      h: h,
-      s: s,
-      v: v
-    }));
+    ret.push(
+      tinycolor({
+        h: h,
+        s: s,
+        v: v,
+      })
+    );
     v = (v + modification) % 1;
   }
   return ret;
@@ -739,7 +871,7 @@ tinycolor.mix = function (color1, color2, amount) {
     r: (rgb2.r - rgb1.r) * p + rgb1.r,
     g: (rgb2.g - rgb1.g) * p + rgb1.g,
     b: (rgb2.b - rgb1.b) * p + rgb1.b,
-    a: (rgb2.a - rgb1.a) * p + rgb1.a
+    a: (rgb2.a - rgb1.a) * p + rgb1.a,
   };
   return tinycolor(rgba);
 };
@@ -753,7 +885,10 @@ tinycolor.mix = function (color1, color2, amount) {
 tinycolor.readability = function (color1, color2) {
   var c1 = tinycolor(color1);
   var c2 = tinycolor(color2);
-  return (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) / (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05);
+  return (
+    (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) /
+    (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05)
+  );
 };
 
 // `isReadable`
@@ -811,10 +946,13 @@ tinycolor.mostReadable = function (baseColor, colorList, args) {
       bestColor = tinycolor(colorList[i]);
     }
   }
-  if (tinycolor.isReadable(baseColor, bestColor, {
-    level: level,
-    size: size
-  }) || !includeFallbackColors) {
+  if (
+    tinycolor.isReadable(baseColor, bestColor, {
+      level: level,
+      size: size,
+    }) ||
+    !includeFallbackColors
+  ) {
     return bestColor;
   } else {
     args.includeFallbackColors = false;
@@ -825,7 +963,7 @@ tinycolor.mostReadable = function (baseColor, colorList, args) {
 // Big List of Colors
 // ------------------
 // <https://www.w3.org/TR/css-color-4/#named-colors>
-var names = tinycolor.names = {
+var names = (tinycolor.names = {
   aliceblue: "f0f8ff",
   antiquewhite: "faebd7",
   aqua: "0ff",
@@ -974,11 +1112,11 @@ var names = tinycolor.names = {
   white: "fff",
   whitesmoke: "f5f5f5",
   yellow: "ff0",
-  yellowgreen: "9acd32"
-};
+  yellowgreen: "9acd32",
+});
 
 // Make it easy to access colors via `hexNames[hex]`
-var hexNames = tinycolor.hexNames = flip(names);
+var hexNames = (tinycolor.hexNames = flip(names));
 
 // Utilities
 // ---------
@@ -1020,7 +1158,7 @@ function bound01(n, max) {
   }
 
   // Convert into [0, 1] range if it isn't already
-  return n % max / parseFloat(max);
+  return (n % max) / parseFloat(max);
 }
 
 // Force a number between 0 and 1
@@ -1065,7 +1203,7 @@ function convertDecimalToHex(d) {
 function convertHexToDecimal(h) {
   return parseIntFromHex(h) / 255;
 }
-var matchers = function () {
+var matchers = (function () {
   // <http://www.w3.org/TR/css3-values/#integers>
   var CSS_INTEGER = "[-\\+]?\\d+%?";
 
@@ -1078,8 +1216,24 @@ var matchers = function () {
   // Actual matching.
   // Parentheses and commas are optional, but not required.
   // Whitespace can take the place of commas or opening paren
-  var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
-  var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
+  var PERMISSIVE_MATCH3 =
+    "[\\s|\\(]+(" +
+    CSS_UNIT +
+    ")[,|\\s]+(" +
+    CSS_UNIT +
+    ")[,|\\s]+(" +
+    CSS_UNIT +
+    ")\\s*\\)?";
+  var PERMISSIVE_MATCH4 =
+    "[\\s|\\(]+(" +
+    CSS_UNIT +
+    ")[,|\\s]+(" +
+    CSS_UNIT +
+    ")[,|\\s]+(" +
+    CSS_UNIT +
+    ")[,|\\s]+(" +
+    CSS_UNIT +
+    ")\\s*\\)?";
   return {
     CSS_UNIT: new RegExp(CSS_UNIT),
     rgb: new RegExp("rgb" + PERMISSIVE_MATCH3),
@@ -1091,9 +1245,9 @@ var matchers = function () {
     hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
     hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
     hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-    hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+    hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
   };
-}();
+})();
 
 // `isValidCSSUnit`
 // Take in a single string / number and check to see if it looks like a CSS unit
@@ -1117,7 +1271,7 @@ function stringInputToObject(color) {
       g: 0,
       b: 0,
       a: 0,
-      format: "name"
+      format: "name",
     };
   }
 
@@ -1126,83 +1280,83 @@ function stringInputToObject(color) {
   // Just return an object and let the conversion functions handle that.
   // This way the result will be the same whether the tinycolor is initialized with string or object.
   var match;
-  if (match = matchers.rgb.exec(color)) {
-    return {
-      r: match[1],
-      g: match[2],
-      b: match[3]
-    };
-  }
-  if (match = matchers.rgba.exec(color)) {
+  if ((match = matchers.rgb.exec(color))) {
     return {
       r: match[1],
       g: match[2],
       b: match[3],
-      a: match[4]
     };
   }
-  if (match = matchers.hsl.exec(color)) {
+  if ((match = matchers.rgba.exec(color))) {
     return {
-      h: match[1],
-      s: match[2],
-      l: match[3]
+      r: match[1],
+      g: match[2],
+      b: match[3],
+      a: match[4],
     };
   }
-  if (match = matchers.hsla.exec(color)) {
+  if ((match = matchers.hsl.exec(color))) {
     return {
       h: match[1],
       s: match[2],
       l: match[3],
-      a: match[4]
     };
   }
-  if (match = matchers.hsv.exec(color)) {
+  if ((match = matchers.hsla.exec(color))) {
     return {
       h: match[1],
       s: match[2],
-      v: match[3]
+      l: match[3],
+      a: match[4],
     };
   }
-  if (match = matchers.hsva.exec(color)) {
+  if ((match = matchers.hsv.exec(color))) {
     return {
       h: match[1],
       s: match[2],
       v: match[3],
-      a: match[4]
     };
   }
-  if (match = matchers.hex8.exec(color)) {
+  if ((match = matchers.hsva.exec(color))) {
+    return {
+      h: match[1],
+      s: match[2],
+      v: match[3],
+      a: match[4],
+    };
+  }
+  if ((match = matchers.hex8.exec(color))) {
     return {
       r: parseIntFromHex(match[1]),
       g: parseIntFromHex(match[2]),
       b: parseIntFromHex(match[3]),
       a: convertHexToDecimal(match[4]),
-      format: named ? "name" : "hex8"
+      format: named ? "name" : "hex8",
     };
   }
-  if (match = matchers.hex6.exec(color)) {
+  if ((match = matchers.hex6.exec(color))) {
     return {
       r: parseIntFromHex(match[1]),
       g: parseIntFromHex(match[2]),
       b: parseIntFromHex(match[3]),
-      format: named ? "name" : "hex"
+      format: named ? "name" : "hex",
     };
   }
-  if (match = matchers.hex4.exec(color)) {
+  if ((match = matchers.hex4.exec(color))) {
     return {
       r: parseIntFromHex(match[1] + "" + match[1]),
       g: parseIntFromHex(match[2] + "" + match[2]),
       b: parseIntFromHex(match[3] + "" + match[3]),
       a: convertHexToDecimal(match[4] + "" + match[4]),
-      format: named ? "name" : "hex8"
+      format: named ? "name" : "hex8",
     };
   }
-  if (match = matchers.hex3.exec(color)) {
+  if ((match = matchers.hex3.exec(color))) {
     return {
       r: parseIntFromHex(match[1] + "" + match[1]),
       g: parseIntFromHex(match[2] + "" + match[2]),
       b: parseIntFromHex(match[3] + "" + match[3]),
-      format: named ? "name" : "hex"
+      format: named ? "name" : "hex",
     };
   }
   return false;
@@ -1213,7 +1367,7 @@ function validateWCAG2Parms(parms) {
   var level, size;
   parms = parms || {
     level: "AA",
-    size: "small"
+    size: "small",
   };
   level = (parms.level || "AA").toUpperCase();
   size = (parms.size || "small").toLowerCase();
@@ -1225,22 +1379,26 @@ function validateWCAG2Parms(parms) {
   }
   return {
     level: level,
-    size: size
+    size: size,
   };
 }
 
-function BWidget(options) {
+function BSWidget(options) {
   var _this = this;
   var cors = "https://beanstack-cors-anywhere.herokuapp.com/";
-  var api = "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
+  var api =
+    "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
   var defaults = {
     groupId: 30,
     container: "#bs-widget",
-    color: "#2323FA"
+    color: "#2323FA",
   };
-  var heart = '<svg width="20" height="29" viewBox="0 0 20 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.10466 9.60099C-1.42936 13.4764 0.777223 19.0596 14.6388 28.4978C14.9823 28.7315 15.4783 28.6482 15.153 28.0563L15.0603 27.8838C14.1577 26.1622 13.1114 22.8931 15.6222 18.7861L15.8194 18.4598C19.007 13.1288 22.0554 5.13492 17.2642 1.50079C12.3347 -2.23819 6.60583 2.63878 6.46388 8.35695L6.3637 8.29836C5.80513 7.98761 3.03132 6.65437 1.10466 9.60099Z"/></svg>';
-  var clock = '<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2.16667C5.3975 2.16667 1.66666 5.89751 1.66666 10.5C1.66666 15.1025 5.3975 18.8333 10 18.8333C14.6025 18.8333 18.3333 15.1025 18.3333 10.5C18.3333 5.89751 14.6025 2.16667 10 2.16667ZM12.155 13.8333L9.41083 11.0892C9.25416 10.9325 9.16666 10.7208 9.16666 10.5V6.33334C9.16666 5.87334 9.54 5.50001 10 5.50001C10.46 5.50001 10.8333 5.87334 10.8333 6.33334V10.155L13.3333 12.655C13.6583 12.98 13.6583 13.5083 13.3333 13.8333C13.0083 14.1583 12.48 14.1583 12.155 13.8333Z"/></svg>';
-  var styles = "#bs-widget,.bs-widget-container{display:-webkit-box;display:-ms-flexbox;-webkit-box-orient:vertical;-webkit-box-direction:normal}#bs-widget,.bs-widget-container,.bs-widget-title-row{-webkit-box-direction:normal}#bs-widget{display:flex;-ms-flex-direction:column;flex-direction:column;width:100%;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:24px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-family:Arial,sans-serif;font-style:normal;--bs-color:red;--bs-light:red;--bs-dark:red}.bs-widget-container{-webkit-box-sizing:border-box;box-sizing:border-box;display:flex;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:32px;gap:28px;position:relative;width:500px;background:#fff;border:2px solid #eaeaea;border-radius:16px}.bs-widget-title-row{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:4px}.bs-widget-title-row .bs-widget-title-container{display:-webkit-box;display:-ms-flexbox;display:flex;gap:12px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.bs-widget-goal-row,.bs-widget-title-row .bs-widget-endson-container{display:-webkit-box;display:-ms-flexbox;-webkit-box-direction:normal}.bs-widget-title-row .bs-widget-endson-container .bs-widget-clock svg,.bs-widget-title-row .bs-widget-title-container .bs-widget-heart svg{fill:var(--bs-color)}.bs-widget-title-row .bs-widget-title-container .bs-widget-title{font-weight:700;font-size:20px;line-height:25px;color:var(--bs-color)}.bs-widget-title-row .bs-widget-endson-container{display:flex;-webkit-box-orient:horizontal;-ms-flex-direction:row;flex-direction:row;gap:8px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}.bs-widget-title-row .bs-widget-endson-container .bs-widget-endson{font-weight:700;font-size:15px;line-height:20px;text-align:right;color:#656565;position:relative;top:-1px}.bs-widget-goal-row{width:100%;display:flex;-webkit-box-orient:vertical;-ms-flex-direction:column;flex-direction:column;gap:12px}.bs-widget-goal-row .bs-widget-goal-text{color:#656565}.bs-widget-goal-row .bs-widget-goal-text strong{font-weight:700;font-size:30px;line-height:34px;color:var(--bs-color)}.bs-widget-goal-row .bs-widget-goal-text span{font-weight:700;font-size:16px}@media screen and (max-width:350px){.bs-widget-title-row .bs-widget-title-container .bs-widget-heart svg{width:12px;height:22px}.bs-widget-title-row .bs-widget-title-container .bs-widget-title{font-size:18px;line-height:22px}.bs-widget-title-row .bs-widget-endson-container .bs-widget-clock{display:none}.bs-widget-title-row .bs-widget-endson-container .bs-widget-endson{font-size:14px;line-height:18px}.bs-widget-goal-row .bs-widget-goal-text{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;gap:2px}.bs-widget-goal-row .bs-widget-goal-text strong{font-size:24px;line-height:30px}.bs-widget-goal-row .bs-widget-goal-text span{font-size:15px;line-height:18px}}.bs-widget-goal-row .bs-widget-goal{margin-top:4px}.bs-widget-goal-row .bs-widget-goal .bs-widget-goal-bar{height:8px;width:100%;background:var(--bs-light);border-radius:8px;position:relative}.bs-widget-goal-row .bs-widget-goal .bs-widget-goal-progress{background:var(--bs-color);border-radius:8px;height:100%;}.bs-widget-goal-row .bs-widget-goal .bs-widget-goal-indicator{width:8px;height:8px;background:#fff;border:4px solid var(--bs-color);-webkit-box-shadow:0 0 0 4px #fff;box-shadow:0 0 0 4px #fff;border-radius:100%;position:absolute;margin-left:-4px;left:0px;top:0;margin-top:-4px}.bs-widget-last-updated-row{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;gap:8px}.bs-widget-last-updated-row .bs-widget-last-updated{font-weight:400;font-size:14px;line-height:18px;color:#707070}.bs-widget-last-updated-row a.bs-widget-visit{font-weight:400;font-size:14px;line-height:18px;text-align:center;-webkit-text-decoration-line:underline;text-decoration-line:underline;color:var(--bs-dark)}@media screen and (max-width:450px){.bs-widget-title-row{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.bs-widget-last-updated-row{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.bs-widget-last-updated-row .bs-widget-last-updated,.bs-widget-last-updated-row a.bs-widget-visit{font-size:13px;line-height:16px}}";
+  var heart =
+    '<svg width="20" height="29" viewBox="0 0 20 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.10466 9.60099C-1.42936 13.4764 0.777223 19.0596 14.6388 28.4978C14.9823 28.7315 15.4783 28.6482 15.153 28.0563L15.0603 27.8838C14.1577 26.1622 13.1114 22.8931 15.6222 18.7861L15.8194 18.4598C19.007 13.1288 22.0554 5.13492 17.2642 1.50079C12.3347 -2.23819 6.60583 2.63878 6.46388 8.35695L6.3637 8.29836C5.80513 7.98761 3.03132 6.65437 1.10466 9.60099Z"/></svg>';
+  var clock =
+    '<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2.16667C5.3975 2.16667 1.66666 5.89751 1.66666 10.5C1.66666 15.1025 5.3975 18.8333 10 18.8333C14.6025 18.8333 18.3333 15.1025 18.3333 10.5C18.3333 5.89751 14.6025 2.16667 10 2.16667ZM12.155 13.8333L9.41083 11.0892C9.25416 10.9325 9.16666 10.7208 9.16666 10.5V6.33334C9.16666 5.87334 9.54 5.50001 10 5.50001C10.46 5.50001 10.8333 5.87334 10.8333 6.33334V10.155L13.3333 12.655C13.6583 12.98 13.6583 13.5083 13.3333 13.8333C13.0083 14.1583 12.48 14.1583 12.155 13.8333Z"/></svg>';
+  var styles =
+    "#bs-widget,.bs-widget-container{display:-webkit-box;display:-ms-flexbox;-webkit-box-orient:vertical;-webkit-box-direction:normal}#bs-widget,.bs-widget-container,.bs-widget-title-row{-webkit-box-direction:normal}#bs-widget{display:flex;-ms-flex-direction:column;flex-direction:column;width:100%;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:24px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-family:Arial,sans-serif;font-style:normal;--bs-color:red;--bs-light:red;--bs-dark:red}.bs-widget-container{-webkit-box-sizing:border-box;box-sizing:border-box;display:flex;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:32px;gap:28px;position:relative;width:500px;background:#fff;border:2px solid #eaeaea;border-radius:16px}.bs-widget-title-row{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:4px}.bs-widget-title-row .bs-widget-title-container{display:-webkit-box;display:-ms-flexbox;display:flex;gap:12px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.bs-widget-goal-row,.bs-widget-title-row .bs-widget-endson-container{display:-webkit-box;display:-ms-flexbox;-webkit-box-direction:normal}.bs-widget-title-row .bs-widget-endson-container .bs-widget-clock svg,.bs-widget-title-row .bs-widget-title-container .bs-widget-heart svg{fill:var(--bs-color)}.bs-widget-title-row .bs-widget-title-container .bs-widget-title{font-weight:700;font-size:20px;line-height:25px;color:var(--bs-color)}.bs-widget-title-row .bs-widget-endson-container{display:flex;-webkit-box-orient:horizontal;-ms-flex-direction:row;flex-direction:row;gap:8px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}.bs-widget-title-row .bs-widget-endson-container .bs-widget-endson{font-weight:700;font-size:15px;line-height:20px;text-align:right;color:#656565;position:relative;top:-1px}.bs-widget-goal-row{width:100%;display:flex;-webkit-box-orient:vertical;-ms-flex-direction:column;flex-direction:column;gap:12px}.bs-widget-goal-row .bs-widget-goal-text{color:#656565}.bs-widget-goal-row .bs-widget-goal-text strong{font-weight:700;font-size:30px;line-height:34px;color:var(--bs-color)}.bs-widget-goal-row .bs-widget-goal-text span{font-weight:700;font-size:16px}@media screen and (max-width:350px){.bs-widget-title-row .bs-widget-title-container .bs-widget-heart svg{width:12px;height:22px}.bs-widget-title-row .bs-widget-title-container .bs-widget-title{font-size:18px;line-height:22px}.bs-widget-title-row .bs-widget-endson-container .bs-widget-clock{display:none}.bs-widget-title-row .bs-widget-endson-container .bs-widget-endson{font-size:14px;line-height:18px}.bs-widget-goal-row .bs-widget-goal-text{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;gap:2px}.bs-widget-goal-row .bs-widget-goal-text strong{font-size:24px;line-height:30px}.bs-widget-goal-row .bs-widget-goal-text span{font-size:15px;line-height:18px}}.bs-widget-goal-row .bs-widget-goal{margin-top:4px}.bs-widget-goal-row .bs-widget-goal .bs-widget-goal-bar{height:8px;width:100%;background:var(--bs-light);border-radius:8px;position:relative}.bs-widget-goal-row .bs-widget-goal .bs-widget-goal-progress{background:var(--bs-color);border-radius:8px;height:100%;}.bs-widget-goal-row .bs-widget-goal .bs-widget-goal-indicator{width:8px;height:8px;background:#fff;border:4px solid var(--bs-color);-webkit-box-shadow:0 0 0 4px #fff;box-shadow:0 0 0 4px #fff;border-radius:100%;position:absolute;margin-left:-4px;left:0px;top:0;margin-top:-4px}.bs-widget-last-updated-row{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;gap:8px}.bs-widget-last-updated-row .bs-widget-last-updated{font-weight:400;font-size:14px;line-height:18px;color:#707070}.bs-widget-last-updated-row a.bs-widget-visit{font-weight:400;font-size:14px;line-height:18px;text-align:center;-webkit-text-decoration-line:underline;text-decoration-line:underline;color:var(--bs-dark)}@media screen and (max-width:450px){.bs-widget-title-row{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.bs-widget-last-updated-row{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.bs-widget-last-updated-row .bs-widget-last-updated,.bs-widget-last-updated-row a.bs-widget-visit{font-size:13px;line-height:16px}}";
   options = _objectSpread2(_objectSpread2({}, defaults), options);
   this.loadRequest = function () {
     var req = new XMLHttpRequest();
@@ -1261,21 +1419,33 @@ function BWidget(options) {
     var endDate = new Date(data.end_date).toLocaleDateString("en-us", {
       year: "numeric",
       day: "numeric",
-      month: "short"
+      month: "short",
     });
     var updatedDate = new Date(data.updated_at).toLocaleDateString("en-us", {
       hour: "2-digit",
       minute: "2-digit",
       month: "short",
       day: "numeric",
-      year: "numeric"
+      year: "numeric",
     });
-    var goalBarPercentage = data.total / data.goal >= 1 ? "100%" : Math.ceil(data.total / data.goal * 10000).toString() + "%";
+    var goalBarPercentage =
+      data.total / data.goal >= 1
+        ? "100%"
+        : Math.ceil((data.total / data.goal) * 10000).toString() + "%";
     var container = document.createElement("div");
     container.setAttribute("class", "bs-widget-container");
-    container.style.setProperty("--bs-color", tinycolor(options.color).toHexString());
-    container.style.setProperty("--bs-dark", tinycolor(options.color).darken().toHexString());
-    container.style.setProperty("--bs-light", tinycolor(options.color).lighten(30).toHexString());
+    container.style.setProperty(
+      "--bs-color",
+      tinycolor(options.color).toHexString()
+    );
+    container.style.setProperty(
+      "--bs-dark",
+      tinycolor(options.color).darken().toHexString()
+    );
+    container.style.setProperty(
+      "--bs-light",
+      tinycolor(options.color).lighten(30).toHexString()
+    );
     var style = document.createElement("style");
     style.innerHTML = styles;
     container.appendChild(style);
@@ -1350,9 +1520,18 @@ function BWidget(options) {
     container.setAttribute("class", "bs-widget-container");
     container.classList.add("error");
     container.innerHTML = error;
-    container.style.setProperty("--bs-color", tinycolor(options.color).toHexString());
-    container.style.setProperty("--bs-dark", tinycolor(options.color).darken().toHexString());
-    container.style.setProperty("--bs-light", tinycolor(options.color).lighten(30).toHexString());
+    container.style.setProperty(
+      "--bs-color",
+      tinycolor(options.color).toHexString()
+    );
+    container.style.setProperty(
+      "--bs-dark",
+      tinycolor(options.color).darken().toHexString()
+    );
+    container.style.setProperty(
+      "--bs-light",
+      tinycolor(options.color).lighten(30).toHexString()
+    );
     var style = document.createElement("style");
     style.innerHTML = styles;
     container.appendChild(style);
@@ -1361,4 +1540,4 @@ function BWidget(options) {
   this.loadRequest();
 }
 
-exports.BWidget = BWidget;
+module.exports = BSWidget;
