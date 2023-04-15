@@ -9,9 +9,10 @@ export default function BSWidget(options) {
     "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
 
   let defaults = {
-    groupId: 30,
+    microsite: 1,
     container: "#bs-widget",
     color: "#2323FA",
+    styled: true,
   };
 
   let heart =
@@ -37,7 +38,7 @@ export default function BSWidget(options) {
       }
     };
 
-    req.open("GET", cors + api + options.groupId);
+    req.open("GET", cors + api + options.microsite);
     req.setRequestHeader("Content-Type", "application/json");
     req.setRequestHeader("Accept", "application/json");
     req.send();
@@ -79,7 +80,9 @@ export default function BSWidget(options) {
     );
 
     const style = document.createElement("style");
-    style.innerHTML = styles;
+    if (options.styled == true) {
+      style.innerHTML = styles;
+    }
     container.appendChild(style);
 
     const titleRow = document.createElement("div");

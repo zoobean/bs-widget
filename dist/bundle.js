@@ -1235,9 +1235,10 @@ var BSWidget = (function () {
     var cors = "https://beanstack-cors-anywhere.herokuapp.com/";
     var api = "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
     var defaults = {
-      groupId: 30,
+      microsite: 1,
       container: "#bs-widget",
-      color: "#2323FA"
+      color: "#2323FA",
+      styled: true
     };
     var heart = '<svg width="20" height="29" viewBox="0 0 20 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.10466 9.60099C-1.42936 13.4764 0.777223 19.0596 14.6388 28.4978C14.9823 28.7315 15.4783 28.6482 15.153 28.0563L15.0603 27.8838C14.1577 26.1622 13.1114 22.8931 15.6222 18.7861L15.8194 18.4598C19.007 13.1288 22.0554 5.13492 17.2642 1.50079C12.3347 -2.23819 6.60583 2.63878 6.46388 8.35695L6.3637 8.29836C5.80513 7.98761 3.03132 6.65437 1.10466 9.60099Z"/></svg>';
     var clock = '<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2.16667C5.3975 2.16667 1.66666 5.89751 1.66666 10.5C1.66666 15.1025 5.3975 18.8333 10 18.8333C14.6025 18.8333 18.3333 15.1025 18.3333 10.5C18.3333 5.89751 14.6025 2.16667 10 2.16667ZM12.155 13.8333L9.41083 11.0892C9.25416 10.9325 9.16666 10.7208 9.16666 10.5V6.33334C9.16666 5.87334 9.54 5.50001 10 5.50001C10.46 5.50001 10.8333 5.87334 10.8333 6.33334V10.155L13.3333 12.655C13.6583 12.98 13.6583 13.5083 13.3333 13.8333C13.0083 14.1583 12.48 14.1583 12.155 13.8333Z"/></svg>';
@@ -1253,7 +1254,7 @@ var BSWidget = (function () {
           _this.error(this.status);
         }
       };
-      req.open("GET", cors + api + options.groupId);
+      req.open("GET", cors + api + options.microsite);
       req.setRequestHeader("Content-Type", "application/json");
       req.setRequestHeader("Accept", "application/json");
       req.send();
@@ -1278,7 +1279,9 @@ var BSWidget = (function () {
       container.style.setProperty("--bs-dark", tinycolor(options.color).darken().toHexString());
       container.style.setProperty("--bs-light", tinycolor(options.color).lighten(30).toHexString());
       var style = document.createElement("style");
-      style.innerHTML = styles;
+      if (options.styled == true) {
+        style.innerHTML = styles;
+      }
       container.appendChild(style);
       var titleRow = document.createElement("div");
       titleRow.setAttribute("class", "bs-widget-title-row");

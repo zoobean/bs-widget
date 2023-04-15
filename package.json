@@ -5,7 +5,8 @@
   "main": "rollup.config.js",
   "type": "module",
   "scripts": {
-    "start": "rollup --config -w"
+    "start": "rollup --config -w",
+    "build": "rollup --config"
   },
   "keywords": [],
   "author": "",
