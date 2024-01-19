@@ -1272,7 +1272,7 @@ var BSWidget = (function () {
         day: "numeric",
         year: "numeric"
       });
-      var goalBarPercentage = data.total / data.goal >= 1 ? "100%" : Math.ceil(data.total / data.goal * 10000).toString() + "%";
+      var goalBarPercentage = data.total / data.goal >= 1 ? "100%" : Math.ceil(data.total / data.goal * 100).toString() + "%";
       var container = document.createElement("div");
       container.setAttribute("class", "bs-widget-container");
       container.style.setProperty("--bs-color", tinycolor(options.color).toHexString());
