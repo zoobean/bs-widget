@@ -62,7 +62,7 @@ export default function BSWidget(options) {
     let goalBarPercentage =
       data.total / data.goal >= 1
         ? "100%"
-        : Math.ceil((data.total / data.goal) * 10000).toString() + "%";
+        : Math.ceil((data.total / data.goal) * 100).toString() + "%";
 
     const container = document.createElement("div");
     container.setAttribute("class", "bs-widget-container");
