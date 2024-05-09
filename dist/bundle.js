@@ -1235,7 +1235,7 @@ var BSWidget = (function () {
     var cors = "https://beanstack-cors-anywhere.herokuapp.com/";
     var api = "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
     var defaults = {
-      microsite: 1,
+      microsite: 6,
       container: "#bs-widget",
       color: "#2323FA",
       styled: true
@@ -1342,11 +1342,13 @@ var BSWidget = (function () {
       lastUpdated.setAttribute("class", "bs-widget-last-updated");
       lastUpdated.innerHTML = "Last updated on " + updatedDate;
       lastUpdatedRow.appendChild(lastUpdated);
-      var visitLink = document.createElement("a");
-      visitLink.setAttribute("class", "bs-widget-visit");
-      visitLink.setAttribute("href", "https://beanstack.com/");
-      visitLink.innerHTML = "Visit our Beanstack site";
-      lastUpdatedRow.appendChild(visitLink);
+
+      // const visitLink = document.createElement("a");
+      // visitLink.setAttribute("class", "bs-widget-visit");
+      // visitLink.setAttribute("href", "https://" +  + "beanstack.com/");
+      // visitLink.innerHTML = "Visit our Beanstack site";
+      // lastUpdatedRow.appendChild(visitLink);
+
       document.querySelector(options.container).appendChild(container);
     };
     this.error = function (error) {

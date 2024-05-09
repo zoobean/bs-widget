@@ -9,7 +9,7 @@ export default function BSWidget(options) {
     "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
 
   let defaults = {
-    microsite: 1,
+    microsite: 6,
     container: "#bs-widget",
     color: "#2323FA",
     styled: true,
@@ -160,11 +160,11 @@ export default function BSWidget(options) {
     lastUpdated.innerHTML = "Last updated on " + updatedDate;
     lastUpdatedRow.appendChild(lastUpdated);
 
-    const visitLink = document.createElement("a");
-    visitLink.setAttribute("class", "bs-widget-visit");
-    visitLink.setAttribute("href", "https://beanstack.com/");
-    visitLink.innerHTML = "Visit our Beanstack site";
-    lastUpdatedRow.appendChild(visitLink);
+    // const visitLink = document.createElement("a");
+    // visitLink.setAttribute("class", "bs-widget-visit");
+    // visitLink.setAttribute("href", "https://" +  + "beanstack.com/");
+    // visitLink.innerHTML = "Visit our Beanstack site";
+    // lastUpdatedRow.appendChild(visitLink);
 
     document.querySelector(options.container).appendChild(container);
   };
