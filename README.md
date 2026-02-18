@@ -2,6 +2,43 @@
 
 Embeddable Beanstack goal widget bundle built with Rollup.
 
+## Usage
+
+Add a container element where the widget should render:
+
+```html
+<div id="bs-widget"></div>
+```
+
+Load the bundle (local build):
+
+```html
+<script src="dist/bundle.js"></script>
+```
+
+Or load it from a CDN (after publishing to npm):
+
+```html
+<script src="https://unpkg.com/bs-widget@latest/dist/bundle.js"></script>
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/bs-widget@latest/dist/bundle.js"></script>
+```
+
+Initialize the widget (same example as `index.html`):
+
+```html
+<script>
+	let widget = new BSWidget({
+		microsite: 6,
+		container: "#bs-widget",
+		color: "purple",
+		styled: true,
+	});
+</script>
+```
+
 ## Requirements
 
 - Node.js 18+
