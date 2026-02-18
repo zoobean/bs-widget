@@ -17,6 +17,7 @@ Add a container element where the widget should render, include the script, then
 		container: "#bs-widget",
 		color: "purple",
 		styled: true,
+		loadingText: "Loading widget...",
 	});
 </script>
 ```
@@ -38,6 +39,7 @@ You can also use jsDelivr:
 		container: "#bs-widget",
 		color: "purple",
 		styled: true,
+		loadingText: "Loading widget...",
 	});
 </script>
 ```

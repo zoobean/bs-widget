@@ -4,15 +4,16 @@ import tinycolor from "tinycolor2";
 
 export default function BSWidget(options) {
   let _this = this;
-  let cors = "https://beanstack-cors-anywhere.herokuapp.com/";
-  let api =
-    "https://beanstackedu.beanstack.com/api/v2/microsites_group_statistics/";
+  let apiBaseUrl =
+    "https://beanstackedu.beanstack.org/api/v2/microsites_group_statistics/";
 
   let defaults = {
     microsite: 6,
     container: "#bs-widget",
     color: "#2323FA",
     styled: true,
+    loadingText: "Loading widget...",
+    apiBaseUrl,
   };
 
   let heart =
@@ -26,22 +27,110 @@ export default function BSWidget(options) {
 
   options = { ...defaults, ...options };
 
+  this.containerElement = document.querySelector(options.container);
+  this.loadingElement = null;
+
+  this.showLoading = function () {
+    if (!this.containerElement || this.loadingElement) {
+      return;
+    }
+
+    const loadingContainer = document.createElement("div");
+    loadingContainer.setAttribute("class", "bs-widget-container bs-widget-loading");
+    loadingContainer.style.setProperty(
+      "--bs-color",
+      tinycolor(options.color).toHexString()
+    );
+    loadingContainer.style.setProperty(
+      "--bs-dark",
+      tinycolor(options.color).darken().toHexString()
+    );
+    loadingContainer.style.setProperty(
+      "--bs-light",
+      tinycolor(options.color).lighten(30).toHexString()
+    );
+
+    const style = document.createElement("style");
+    if (options.styled == true) {
+      style.innerHTML = styles;
+    }
+    loadingContainer.appendChild(style);
+
+    const loadingRow = document.createElement("div");
+    loadingRow.setAttribute("class", "bs-widget-goal-row");
+    loadingContainer.appendChild(loadingRow);
+
+    const loadingText = document.createElement("div");
+    loadingText.setAttribute("class", "bs-widget-goal-text");
+    loadingText.textContent = options.loadingText;
+    loadingRow.appendChild(loadingText);
+
+    this.containerElement.appendChild(loadingContainer);
+    this.loadingElement = loadingContainer;
+  };
+
+  this.hideLoading = function () {
+    if (this.loadingElement && this.loadingElement.parentNode) {
+      this.loadingElement.parentNode.removeChild(this.loadingElement);
+    }
+    this.loadingElement = null;
+  };
+
   this.loadRequest = function () {
+    _this.showLoading();
+
     let req = new XMLHttpRequest();
+    let requestResolved = false;
+
+    const completeWithSuccess = function (responseText) {
+      if (requestResolved) {
+        return;
+      }
+      requestResolved = true;
+      _this.hideLoading();
+      let data = JSON.parse(responseText);
+      _this.init(data.statistic);
+    };
+
+    const completeWithError = function (statusCode) {
+      if (requestResolved) {
+        return;
+      }
+      requestResolved = true;
+      _this.hideLoading();
+      _this.error(statusCode);
+    };
 
     req.onreadystatechange = function () {
       if (this.readyState === 4 && this.status === 200) {
-        let data = JSON.parse(this.responseText);
-        _this.init(data.statistic);
+        completeWithSuccess(this.responseText);
       } else if (this.readyState === 4 && this.status != 200) {
-        _this.error(this.status);
+        completeWithError(this.status);
       }
     };
 
-    req.open("GET", cors + api + options.microsite);
-    req.setRequestHeader("Content-Type", "application/json");
+    req.onerror = function () {
+      completeWithError(0);
+    };
+
+    let requestUrl = options.apiBaseUrl + options.microsite;
+
+    req.open("GET", requestUrl);
     req.setRequestHeader("Accept", "application/json");
+    req.setRequestHeader("Content-Type", "application/json");
     req.send();
+  };
+
+  this.getErrorMessage = function (errorCode) {
+    if (errorCode === 0) {
+      return "Request blocked by CORS or network policy.";
+    }
+
+    if (errorCode === 403) {
+      return "Access forbidden by the data source.";
+    }
+
+    return "Request failed with status " + errorCode + ".";
   };
 
   this.init = function (data) {
@@ -166,14 +255,16 @@ export default function BSWidget(options) {
     // visitLink.innerHTML = "Visit our Beanstack site";
     // lastUpdatedRow.appendChild(visitLink);
 
-    document.querySelector(options.container).appendChild(container);
+    if (_this.containerElement) {
+      _this.containerElement.appendChild(container);
+    }
   };
 
   this.error = function (error) {
     const container = document.createElement("div");
     container.setAttribute("class", "bs-widget-container");
     container.classList.add("error");
-    container.innerHTML = error;
+    container.textContent = _this.getErrorMessage(error);
     container.style.setProperty(
       "--bs-color",
       tinycolor(options.color).toHexString()
@@ -191,7 +282,9 @@ export default function BSWidget(options) {
     style.innerHTML = styles;
     container.appendChild(style);
 
-    document.querySelector(options.container).appendChild(container);
+    if (_this.containerElement) {
+      _this.containerElement.appendChild(container);
+    }
   };
 
   this.loadRequest();
