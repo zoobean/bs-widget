@@ -10,7 +10,7 @@ Add a container element where the widget should render, include the script, then
 
 ```html
 <div id="bs-widget"></div>
-<script src="https://unpkg.com/bs-widget@1.0.1/dist/bundle.js"></script>
+<script src="https://unpkg.com/bs-widget@1.0.2/dist/bundle.js"></script>
 <script>
 	let widget = new BSWidget({
 		microsite: 6,
@@ -26,7 +26,7 @@ Add a container element where the widget should render, include the script, then
 You can also use jsDelivr:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/bs-widget@1.0.1/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-widget@1.0.2/dist/bundle.js"></script>
 ```
 
 ### Option B: Local build
@@ -131,3 +131,23 @@ yarn verify
 ```
 
 `prepublishOnly` runs the same verification automatically to prevent publishing without a fresh passing build.
+
+## Automated release (npm + GitHub Release)
+
+This repo includes a tag-driven workflow at `.github/workflows/release.yml`.
+
+1. Bump the package version in `package.json`.
+2. Commit and push your changes.
+3. Create and push a matching tag (`v` + package version):
+
+```bash
+git tag v1.0.2
+git push origin v1.0.2
+```
+
+On tag push, GitHub Actions will:
+
+- validate tag version matches `package.json`
+- run `yarn verify`
+- publish to npm
+- create a GitHub Release with generated notes
