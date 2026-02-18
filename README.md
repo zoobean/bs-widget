@@ -56,6 +56,9 @@ You can also use jsDelivr:
 - `styled` (boolean): inject widget styles when `true`
 - `loadingText` (string): message shown while request is in flight
 - `apiBaseUrl` (string): base endpoint that returns JSON statistics
+- `requestTimeoutMs` (number): optional XHR timeout in milliseconds (`0` disables timeout)
+- `onLoad` (function): optional callback called with fetched `statistic` payload
+- `onError` (function): optional callback called with `{ statusCode, message }`
 
 Default `apiBaseUrl`:
 
@@ -64,6 +67,11 @@ https://beanstackedu.beanstack.org/api/v2/microsites_group_statistics/
 ```
 
 If your endpoint redirects to an HTML page instead of returning JSON, the widget cannot render stats from that URL.
+
+### Lifecycle methods
+
+- `widget.refresh()` re-fetches and re-renders the widget in place.
+- `widget.destroy()` removes the rendered widget and aborts any in-flight request.
 
 ## Requirements
 

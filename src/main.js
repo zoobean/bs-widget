@@ -14,6 +14,9 @@ export default function BSWidget(options) {
     styled: true,
     loadingText: "Loading widget...",
     apiBaseUrl: apiBaseUrl,
+    requestTimeoutMs: 0,
+    onLoad: null,
+    onError: null,
   };
 
   let heart =
@@ -29,6 +32,14 @@ export default function BSWidget(options) {
 
   this.containerElement = document.querySelector(options.container);
   this.loadingElement = null;
+  this.renderedElement = null;
+  this.activeRequest = null;
+
+  this.invokeCallback = function (callback, payload) {
+    if (typeof callback === "function") {
+      callback(payload, this);
+    }
+  };
 
   this.showLoading = function () {
     if (!this.containerElement || this.loadingElement) {
@@ -76,20 +87,45 @@ export default function BSWidget(options) {
     this.loadingElement = null;
   };
 
+  this.removeRenderedElement = function () {
+    if (this.renderedElement && this.renderedElement.parentNode) {
+      this.renderedElement.parentNode.removeChild(this.renderedElement);
+    }
+    this.renderedElement = null;
+  };
+
+  this.destroy = function () {
+    if (this.activeRequest) {
+      this.activeRequest.abort();
+      this.activeRequest = null;
+    }
+
+    this.hideLoading();
+    this.removeRenderedElement();
+  };
+
+  this.refresh = function () {
+    this.removeRenderedElement();
+    this.loadRequest();
+  };
+
   this.loadRequest = function () {
     _this.showLoading();
 
     let req = new XMLHttpRequest();
     let requestResolved = false;
+    _this.activeRequest = req;
 
     const completeWithSuccess = function (responseText) {
       if (requestResolved) {
         return;
       }
       requestResolved = true;
+      _this.activeRequest = null;
       _this.hideLoading();
       let data = JSON.parse(responseText);
       _this.init(data.statistic);
+      _this.invokeCallback(options.onLoad, data.statistic);
     };
 
     const completeWithError = function (statusCode) {
@@ -97,8 +133,13 @@ export default function BSWidget(options) {
         return;
       }
       requestResolved = true;
+      _this.activeRequest = null;
       _this.hideLoading();
       _this.error(statusCode);
+      _this.invokeCallback(options.onError, {
+        statusCode,
+        message: _this.getErrorMessage(statusCode),
+      });
     };
 
     req.onreadystatechange = function () {
@@ -113,11 +154,20 @@ export default function BSWidget(options) {
       completeWithError(0);
     };
 
+    req.ontimeout = function () {
+      completeWithError(408);
+    };
+
     let requestUrl = options.apiBaseUrl + options.microsite;
 
     req.open("GET", requestUrl);
     req.setRequestHeader("Accept", "application/json");
     req.setRequestHeader("Content-Type", "application/json");
+
+    if (options.requestTimeoutMs > 0) {
+      req.timeout = options.requestTimeoutMs;
+    }
+
     req.send();
   };
 
@@ -128,6 +178,10 @@ export default function BSWidget(options) {
 
     if (errorCode === 403) {
       return "Access forbidden by the data source.";
+    }
+
+    if (errorCode === 408) {
+      return "Request timed out.";
     }
 
     return "Request failed with status " + errorCode + ".";
@@ -256,7 +310,9 @@ export default function BSWidget(options) {
     // lastUpdatedRow.appendChild(visitLink);
 
     if (_this.containerElement) {
+      _this.removeRenderedElement();
       _this.containerElement.appendChild(container);
+      _this.renderedElement = container;
     }
   };
 
@@ -283,7 +339,9 @@ export default function BSWidget(options) {
     container.appendChild(style);
 
     if (_this.containerElement) {
+      _this.removeRenderedElement();
       _this.containerElement.appendChild(container);
+      _this.renderedElement = container;
     }
   };
 
