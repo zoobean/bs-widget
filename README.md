@@ -2,33 +2,36 @@
 
 Embeddable Beanstack goal widget bundle built with Rollup.
 
-## Usage
+## Quick Start
 
-Add a container element where the widget should render:
+Add a container element where the widget should render, include the script, then initialize the widget.
+
+### Option A: CDN (published package)
 
 ```html
 <div id="bs-widget"></div>
+<script src="https://unpkg.com/bs-widget@1.0.1/dist/bundle.js"></script>
+<script>
+	let widget = new BSWidget({
+		microsite: 6,
+		container: "#bs-widget",
+		color: "purple",
+		styled: true,
+	});
+</script>
 ```
 
-Load the bundle (local build):
+You can also use jsDelivr:
 
 ```html
+<script src="https://cdn.jsdelivr.net/npm/bs-widget@1.0.1/dist/bundle.js"></script>
+```
+
+### Option B: Local build
+
+```html
+<div id="bs-widget"></div>
 <script src="dist/bundle.js"></script>
-```
-
-Or load it from a CDN (after publishing to npm):
-
-```html
-<script src="https://unpkg.com/bs-widget@latest/dist/bundle.js"></script>
-```
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/bs-widget@latest/dist/bundle.js"></script>
-```
-
-Initialize the widget (same example as `index.html`):
-
-```html
 <script>
 	let widget = new BSWidget({
 		microsite: 6,
@@ -46,13 +49,13 @@ Initialize the widget (same example as `index.html`):
 
 ## Development
 
-- Install dependencies:
+Install dependencies:
 
 ```bash
 yarn install
 ```
 
-- Start local preview with watch support (recommended):
+Start local preview with watch support (recommended):
 
 ```bash
 yarn dev
@@ -60,19 +63,19 @@ yarn dev
 
 This runs Rollup in watch mode and serves the project at `http://localhost:8080`.
 
-- Start local preview and auto-open in browser:
+Start local preview and auto-open in browser:
 
 ```bash
 yarn dev:open
 ```
 
-- Start only Rollup in watch mode:
+Start only Rollup in watch mode:
 
 ```bash
 yarn start
 ```
 
-- Build once:
+Build once:
 
 ```bash
 yarn build
@@ -80,7 +83,7 @@ yarn build
 
 ## Testing
 
-- Run smoke test (build + verification):
+Run smoke test (build + verification):
 
 ```bash
 yarn test
@@ -90,7 +93,7 @@ The smoke test checks that `dist/bundle.js` is generated and includes the `BSWid
 
 ## Release checks
 
-- Run all checks before publishing:
+Run all checks before publishing:
 
 ```bash
 yarn verify
