@@ -13,7 +13,7 @@ export default function BSWidget(options) {
     color: "#2323FA",
     styled: true,
     loadingText: "Loading widget...",
-    apiBaseUrl,
+    apiBaseUrl: apiBaseUrl,
   };
 
   let heart =

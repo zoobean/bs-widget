@@ -18,6 +18,7 @@ Add a container element where the widget should render, include the script, then
 		color: "purple",
 		styled: true,
 		loadingText: "Loading widget...",
+		apiBaseUrl: "https://beanstackedu.beanstack.org/api/v2/microsites_group_statistics/",
 	});
 </script>
 ```
@@ -40,9 +41,29 @@ You can also use jsDelivr:
 		color: "purple",
 		styled: true,
 		loadingText: "Loading widget...",
+		apiBaseUrl: "https://beanstackedu.beanstack.org/api/v2/microsites_group_statistics/",
 	});
 </script>
 ```
+
+## Configuration
+
+`BSWidget` supports these commonly used options:
+
+- `microsite` (number): microsite group id appended to `apiBaseUrl`
+- `container` (string): CSS selector for target mount element
+- `color` (string): base accent color for widget styles
+- `styled` (boolean): inject widget styles when `true`
+- `loadingText` (string): message shown while request is in flight
+- `apiBaseUrl` (string): base endpoint that returns JSON statistics
+
+Default `apiBaseUrl`:
+
+```text
+https://beanstackedu.beanstack.org/api/v2/microsites_group_statistics/
+```
+
+If your endpoint redirects to an HTML page instead of returning JSON, the widget cannot render stats from that URL.
 
 ## Requirements
 
