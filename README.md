@@ -29,6 +29,14 @@ You can also use jsDelivr:
 <script src="https://cdn.jsdelivr.net/npm/bs-widget@1.0.2/dist/bundle.js"></script>
 ```
 
+Alternatively, to always load directly from the `main` branch on GitHub (e.g. for clients with a fixed URL):
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/zoobean/bs-widget/dist/bundle.js"></script>
+```
+
+> **Note:** `dist/bundle.js` is automatically rebuilt and committed to `main` by the `sync-dist` GitHub Actions workflow whenever source files change. If you notice stale content after a release, force a cache refresh by visiting `https://purge.jsdelivr.net/gh/zoobean/bs-widget/dist/bundle.js`.
+
 ### Option B: Local build
 
 ```html
