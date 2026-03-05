@@ -10,7 +10,7 @@ Add a container element where the widget should render, include the script, then
 
 ```html
 <div id="bs-widget"></div>
-<script src="https://unpkg.com/bs-widget@1.0.2/dist/bundle.js"></script>
+<script src="https://unpkg.com/bs-widget/dist/bundle.js"></script>
 <script>
 	let widget = new BSWidget({
 		microsite: 6,
@@ -26,7 +26,7 @@ Add a container element where the widget should render, include the script, then
 You can also use jsDelivr:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/bs-widget@1.0.2/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-widget/dist/bundle.js"></script>
 ```
 
 Alternatively, to always load directly from the `main` branch on GitHub (e.g. for clients with a fixed URL):
